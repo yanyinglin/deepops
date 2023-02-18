@@ -17,8 +17,7 @@ spec:
           - key: nvidia.com/gpu.product
             operator: In
             values:
-            - A100-SXM4-40GB
-            - A100-SXM4-80GB
+            - Tesla-V100-PCIE-32GB
   containers:
     - name: gpu-pod
       image:  nvcr.io/nvidia/k8s/cuda-sample:nbody
@@ -26,4 +25,4 @@ spec:
       args: ["-c", "nvidia-smi"]
       resources:
         limits:
-          nvidia.com/gpu: 1
+          nvidia.com/gpu: 3

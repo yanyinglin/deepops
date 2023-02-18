@@ -9,7 +9,7 @@
 #   For production deployments please configur NFS with storage-partner guidance
 #
 # Install the required NFS software on all nodes and then helm install the nfs-client 
-- hosts: kube-master[0]
+- hosts: cc122
   become: yes
   tasks:
   - name: Make sure NFS directory exists and is globally writable
@@ -32,7 +32,7 @@
   tags:
     - nfs_software
 
-- hosts: kube-master[0]
+- hosts: cc122
   become: true
   tasks:
     - name: install nfs-client-provisioner

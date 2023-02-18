@@ -260,9 +260,9 @@
   vars:
     ansible_become: no
   tasks:
-    # - name: Install Helm on admin node
-      # command: "curl -o /usr/local/bin/helm http://10.10.1.121:10000/files/awsometools/shell/helm && chmod +x /usr/local/bin/helm"
-      # delegate_to: localhost
+    - name: Install Helm on admin node
+      command: "curl -o /usr/local/bin/helm http://10.10.1.121:10000/files/shares/helm && chmod +x /usr/local/bin/helm"
+      delegate_to: localhost
     - name: Globally update the deprecated "stable" helm repo
       command: "/usr/local/bin/helm repo add 'stable' 'https://charts.helm.sh/stable' --force-update"
       delegate_to: localhost

@@ -255,6 +255,7 @@ elif [ ${KUBEFLOW_PRINT} ]; then
   get_url
   print_info
 elif [ ${KUBEFLOW_DELETE} ]; then
+  # fix_terminating_ns
   tear_down
 elif [ ${KUBEFLOW_WAIT} ]; then
   # Run print_info to get the kf_url
@@ -265,7 +266,7 @@ elif [ ${KUBEFLOW_CLONE} ]; then
   clone_repo
 else
   install_dependencies
-  clone_repo
+  # clone_repo
   stand_up
   # install_mpi_operator # BUG: https://github.com/NVIDIA/deepops/issues/737
   get_url
