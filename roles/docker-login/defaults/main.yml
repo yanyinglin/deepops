@@ -3,11 +3,7 @@ docker_login_state: present
 docker_login_reauth: yes
 docker_login_disable_log_password: yes
 
-#docker_login_registries:
-#- registry: docker.io
-#  username: myuser
-#  password: mypassword
-#  email: docker@docker.io
-#- registry: nvcr.io
-#  username: '$oauthtoken'
-#  password: mypassword
+docker_login_registries:
+- registry: k.harbor.siat.ac.cn
+  username: admin
+  password: Harbor12345

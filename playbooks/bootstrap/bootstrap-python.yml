@@ -22,10 +22,10 @@
   become: true 
   gather_facts: true
   tasks:
-    - name: force an apt update on Ubuntu
-      apt:
-        update_cache: yes
-      when: ansible_distribution == "Ubuntu"
+    # - name: force an apt update on Ubuntu
+    #   apt:
+    #     update_cache: yes
+    #   when: ansible_distribution == "Ubuntu"
 
     - name: install python 3 libraries if python 3 is present
       package:

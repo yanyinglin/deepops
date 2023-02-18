@@ -86,3 +86,12 @@ kube_enable_rsyslog_client: true
 rsyslog_server_hostname: "{{ groups['kube-master'][0] }}"
 rsyslog_client_tcp_host: "{{ rsyslog_server_hostname }}"
 rsyslog_client_group: "k8s-cluster"
+
+http_proxy: http://172.20.110.31:10081
+https_proxy: http://172.20.110.31:10081
+no_proxy: localhost,cluster.local,127.0.0.1,::1,10.0.2.10,10.0.2.20,10.0.2.30,172.169.8.0,172.16.101.0,10.10.1.0
+
+proxy_env:
+      http_proxy: '{{ http_proxy }}'
+      https_proxy: '{{ https_proxy }}'
+      no_proxy: '{{ no_proxy }}'

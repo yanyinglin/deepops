@@ -38,10 +38,10 @@ PROXY_USE=`grep -v ^# ${SCRIPT_DIR}/deepops/proxy.sh 2>/dev/null | grep -v ^$ | 
 export DEBIAN_FRONTEND=noninteractive
 
 # Exit if run as root
-if [ $(id -u) -eq 0 ] ; then
-    echo "Please run as a regular user"
-    exit
-fi
+# if [ $(id -u) -eq 0 ] ; then
+#     echo "Please run as a regular user"
+#     exit
+# fi
 
 # Proxy wrapper
 as_sudo(){
