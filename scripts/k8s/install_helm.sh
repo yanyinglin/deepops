@@ -42,7 +42,7 @@ if [ "${HELM_MINIMUM_VERSION}" != "${helm_min_installed}" ]; then
         sudo mv $(which helm) "$(which helm).bak"
         echo "Helm ${helm_version} currently installed, upgrading to ${HELM_MINIMUM_VERSION}"
     fi
-    curl -fsSL -o /var/tmp/get_helm.sh "${HELM_INSTALL_SCRIPT_URL}"
+    curl -x http://172.20.110.31:10081 -fsSL -o /var/tmp/get_helm.sh "${HELM_INSTALL_SCRIPT_URL}"
     chmod +x /var/tmp/get_helm.sh
     #sed -i 's/sudo//g' /var/tmp/get_helm.sh
     mkdir -p ${HELM_INSTALL_DIR}

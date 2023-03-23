@@ -6,10 +6,11 @@
 
 # project-specific
 /admin.conf
-/config*/
+# /config*/
 !/config.example/
 /roles/galaxy/
 /collections/*
 /k8s-config/
 /kubectl
 /tridentctl
+/submodules/*

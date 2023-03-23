@@ -1,0 +1,184 @@
+#
+# Server Inventory File
+#
+# Uncomment and change the IP addresses in this file to match your environment
+# Define per-group or per-host configuration in group_vars/*.yml
+
+######
+# ALL NODES
+# NOTE: Use existing hostnames here, DeepOps will configure server hostnames to match these values
+######
+[all]
+cc103	        ansible_host=172.169.8.36
+cc104	        ansible_host=172.169.8.71
+cc107	        ansible_host=172.169.8.86
+cc108	        ansible_host=172.169.8.91
+cc109	        ansible_host=172.169.8.218
+cc110	        ansible_host=172.169.8.253
+cc111	        ansible_host=172.169.8.102
+cc114	        ansible_host=172.169.8.3
+cc116	        ansible_host=172.169.8.105
+cc119	        ansible_host=172.169.8.106
+cc122	        ansible_host=172.169.8.207
+cc123	        ansible_host=172.169.8.70
+cc124	        ansible_host=172.169.8.179
+cc130	        ansible_host=172.169.8.112
+cc136	        ansible_host=172.169.8.249
+cc140	        ansible_host=172.169.8.93
+cc141	        ansible_host=172.169.8.101
+cc142	        ansible_host=172.169.8.2
+cc143	        ansible_host=172.169.8.239
+cc147	        ansible_host=172.169.8.34
+cc148	        ansible_host=172.169.8.251
+cc164	        ansible_host=172.169.8.98
+cc168	        ansible_host=172.169.8.39
+cc173	        ansible_host=172.169.8.15
+cc177	        ansible_host=172.169.8.115
+cc178	        ansible_host=172.169.8.57
+cc184	        ansible_host=172.169.8.108
+cc185	        ansible_host=172.169.8.94
+cc187	        ansible_host=172.169.8.121
+cc191	        ansible_host=172.169.8.29
+cc196	        ansible_host=172.169.8.99
+
+
+#GPU
+cc224       ansible_host=172.169.8.224
+cc225       ansible_host=172.169.8.62
+
+cc229       ansible_host=172.169.8.216
+cc230       ansible_host=172.169.8.19
+
+
+cc234       ansible_host=172.169.8.211
+cc236       ansible_host=172.169.8.109
+
+cc238       ansible_host=172.169.8.203
+cc239       ansible_host=172.169.8.196
+cc240       ansible_host=172.169.8.23
+cc241       ansible_host=172.169.8.122
+cc242       ansible_host=172.169.8.32
+
+
+#host
+# k.harbor.siat.ac.cn  ansible_host=172.169.8.126
+
+
+######
+# KUBERNETES
+######
+
+[kube_control_plane]
+cc122
+cc107
+cc108
+cc109
+cc110
+
+[kube-master]
+cc122
+cc107
+cc108
+cc109
+cc110
+
+# Odd number of nodes required
+[etcd]
+cc107
+cc108
+cc109
+
+# Also add mgmt/master nodes here if they will run non-control plane jobs
+[kube-node]
+#gpu01
+#gpu02
+cc224
+cc225
+cc229
+cc230
+cc234
+cc238
+cc239
+cc240
+cc241
+cc242
+
+
+
+#cpu
+cc103
+cc104
+cc111
+cc114
+cc116
+cc119
+; cc123
+; cc124
+; cc130
+; cc136
+; cc140
+; cc141
+; cc142
+; cc143
+; cc147
+; cc148
+; cc164
+; cc168
+; cc173
+; cc177
+; cc178
+; cc184
+; cc185
+; cc187
+; cc191
+; cc196
+
+[k8s-cluster:children]
+kube-master
+kube-node
+
+######
+# SLURM
+######
+[slurm-master]
+#login01
+[slurm-nfs]
+#login01
+
+[slurm-node]
+#gpu01 
+#gpu02
+# The following groups are used to break out individual cluster services onto
+# different nodes. By default, we put all these functions on the cluster head
+# node. To break these out into different nodes, replace the
+# [group:children] section with [group], and list individual nodes.
+[slurm-cache:children]
+slurm-master
+
+[slurm-nfs-client:children]
+slurm-node
+
+[slurm-metric:children]
+slurm-master
+
+[slurm-login:children]
+slurm-master
+
+# Single group for the whole cluster
+[slurm-cluster:children]
+slurm-master
+slurm-node
+slurm-cache
+slurm-nfs
+slurm-metric
+slurm-login
+
+######
+# SSH connection configuration
+######
+[all:vars]
+# SSH User
+#ansible_user=ubuntu
+#ansible_ssh_private_key_file='~/.ssh/id_rsa'
+# SSH bastion/jumpbox
+#ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ubuntu@10.0.0.1"'
